@@ -1,0 +1,47 @@
+﻿@using P329UserCrud.Areas.Admin.Models;
+@model List<UserViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User index</h1>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Country</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@item.Username</td>
+                    <td>@item.Email</td>
+                    <td>@item.Country</td>
+                    <td>
+                        @foreach(var role in item.Roles)
+                        {
+                            @role
+                        }
+                    </td>
+                    <td>
+                        <form method="post" asp-action="delete">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" name="id" value="@item.Id">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <a class="btn btn-warning">Update</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
